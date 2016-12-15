@@ -1,17 +1,18 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as peopleActions from '../../actions/people-actions';
-// import PeopleList from './PeopleList';
-// import PersonInput from './PersonInput';
 import HomePage from './HomePage';
 import AddPlayer from './AddPlayer';
+import { Button, ButtonToolbar } from 'react-bootstrap';
 
 class HomePageContainer extends Component {
   constructor(props) {
     super(props);
 
     this.onAddPlayerClick = this.onAddPlayerClick.bind(this);
+    this.onRemovePlayerClick = this.onRemovePlayerClick.bind(this);
+    this.onCitePlayersClick = this.onCitePlayersClick.bind(this);
 
     this.state = {
       numplayers: props.numplayers
@@ -19,9 +20,23 @@ class HomePageContainer extends Component {
   }
 
   onAddPlayerClick(){
+    this.state.numplayers >= 8 ?
+    console.log("can't exceed 8 players") :
     this.setState((prevState, props) => {
       return {numplayers: prevState.numplayers + 1};
     });
+  }
+
+  onRemovePlayerClick(){
+    this.state.numplayers <= 2 ?
+    console.log('must have at least 2 players') :
+    this.setState((prevState, props) => {
+      return {numplayers: prevState.numplayers - 1};
+    });
+  }
+
+  onCitePlayersClick(){
+    console.log(this.state.numplayers);
   }
 
   render() {
@@ -31,9 +46,8 @@ class HomePageContainer extends Component {
       <div className="wholeHomePage">
         <div className="numPlayersCounter">
           <p>Numplayers: {numplayers}</p>
-          <button onClick={this.onAddPlayerClick}>Add Player</button>
+          <AddPlayer numplayers={numplayers} onAddPlayerClick={this.onAddPlayerClick} onRemovePlayerClick={this.onRemovePlayerClick} />
         </div>
-        <HomePage />
       </div>
     );
   }

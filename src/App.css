@@ -1,10 +1,7 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  background-color: #DBB59A;
+  height: 100vh;
 }
 
 .App-header {
@@ -36,18 +33,18 @@ html, body{
   height:100%;
 }
 
-.App{
-  background-color: #DBB59A;
-  height: 100vh;
-  /*border-style: solid;
-  border-width: 10px;*/
-}
-
 .wholeHomePage{
   background-color: #DBB59A;
 }
 
 .numPlayersCounter{
   text-align: right;
+  align-self: right;
   margin: 100px
+}
+
+.addPlayerButton{
+  height: 5%;
+  width: 5%;
+  border-radius: 50%;
 }
