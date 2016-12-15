@@ -1,18 +1,18 @@
 import React, {PropTypes, Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as peopleActions from '../actions/people-actions';
-import PeopleList from './PeopleList';
-import PersonInput from './PersonInput';
+import * as peopleActions from '../../actions/people-actions';
+// import PeopleList from './PeopleList';
+// import PersonInput from './PersonInput';
+import HomePage from './HomePage';
 
-class PeopleContainer extends Component {
+class HomePageContainer extends Component {
   constructor(props) {
     super(props);
 
     this.onAddPlayerClick = this.onAddPlayerClick.bind(this);
 
     this.state = {
-      people: [],
       numplayers: props.numplayers
     };
   }
@@ -24,29 +24,26 @@ class PeopleContainer extends Component {
   }
 
   render() {
-    const {people, numplayers} = this.state;
+    const {numplayers} = this.state;
     // console.log('numplayers', numplayers);
     return (
-      <div>
-        <PersonInput addPerson={this.props.actions.addPerson} />
-        <PeopleList people={people} />
+      <div className="wholeHomePage">
         <div>
           <p>Numplayers: {numplayers}</p>
           <button onClick={this.onAddPlayerClick}>Add Player</button>
         </div>
+        <HomePage />
       </div>
     );
   }
 }
 
-PeopleContainer.propTypes = {
-  people: PropTypes.array.isRequired,
+HomePageContainer.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, props) {
   return {
-    people: state.people,
     numplayers: state.numplayers
   };
 }
@@ -57,4 +54,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PeopleContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePageContainer);
