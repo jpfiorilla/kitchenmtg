@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as peopleActions from '../../actions/people-actions';
-import HomePage from './HomePage';
-import AddPlayer from './AddPlayer';
-import { Button, ButtonToolbar } from 'react-bootstrap';
+import * as playerActions from '../../actions/player-actions';
+import { Button } from 'react-bootstrap';
 
 class HomePageContainer extends Component {
   constructor(props) {
@@ -12,7 +10,6 @@ class HomePageContainer extends Component {
 
     this.onAddPlayerClick = this.onAddPlayerClick.bind(this);
     this.onRemovePlayerClick = this.onRemovePlayerClick.bind(this);
-    this.onCitePlayersClick = this.onCitePlayersClick.bind(this);
 
     this.state = {
       numplayers: props.numplayers
@@ -20,7 +17,7 @@ class HomePageContainer extends Component {
   }
 
   onAddPlayerClick(){
-    this.state.numplayers >= 8 ?
+    return this.state.numplayers >= 8 ?
     console.log("can't exceed 8 players") :
     this.setState((prevState, props) => {
       return {numplayers: prevState.numplayers + 1};
@@ -28,25 +25,24 @@ class HomePageContainer extends Component {
   }
 
   onRemovePlayerClick(){
-    this.state.numplayers <= 2 ?
+    return this.state.numplayers <= 2 ?
     console.log('must have at least 2 players') :
     this.setState((prevState, props) => {
       return {numplayers: prevState.numplayers - 1};
     });
   }
 
-  onCitePlayersClick(){
-    console.log(this.state.numplayers);
-  }
-
   render() {
-    const {numplayers} = this.state;
-    // console.log('numplayers', numplayers);
+    let {numplayers} = this.state;
+    let removePlayerDisable, addPlayerDisable;
+    removePlayerDisable = numplayers <= 2 ? true : false;
+    addPlayerDisable = numplayers >= 8 ? true : false;
     return (
       <div className="wholeHomePage">
         <div className="numPlayersCounter">
           <p>Numplayers: {numplayers}</p>
-          <AddPlayer numplayers={numplayers} onAddPlayerClick={this.onAddPlayerClick} onRemovePlayerClick={this.onRemovePlayerClick} />
+          <Button onClick={this.onAddPlayerClick} bsStyle="primary" className="addPlayerButton" disabled={addPlayerDisable}>+</Button>
+          <Button onClick={this.onRemovePlayerClick} bsStyle="primary" className="addPlayerButton" disabled={removePlayerDisable}>-</Button>
         </div>
       </div>
     );
@@ -65,7 +61,7 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(peopleActions, dispatch)
+    actions: bindActionCreators(playerActions, dispatch)
   }
 }
 

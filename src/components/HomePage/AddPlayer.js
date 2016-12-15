@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import { Button, ButtonToolbar } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as peopleActions from '../../actions/people-actions';
+import * as playerActions from '../../actions/player-actions';
 
 class AddPlayer extends Component{
     constructor(props) {
@@ -14,10 +14,14 @@ class AddPlayer extends Component{
     }
 
     render(){
+        let addPlayerDisable, removePlayerDisable;
+        let {numplayers} = this.state;
+        numplayers <= 2 ? removePlayerDisable = true : removePlayerDisable = false;
+        numplayers >= 8 ? addPlayerDisable = true : addPlayerDisable = false;
         return(
             <div>
-                <Button onClick={this.props.onAddPlayerClick} bsStyle="primary" className="addPlayerButton">+</Button>
-                <Button onClick={this.props.onRemovePlayerClick} bsStyle="primary" className="addPlayerButton">-</Button>
+                <Button onClick={this.props.onAddPlayerClick} bsStyle="primary" className="addPlayerButton" disabled={addPlayerDisable}>+</Button>
+                <Button onClick={this.props.onRemovePlayerClick} bsStyle="primary" className="addPlayerButton" disabled={removePlayerDisable}>-</Button>
             </div>
         )
     }
@@ -31,7 +35,7 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(peopleActions, dispatch)
+    actions: bindActionCreators(playerActions, dispatch)
   }
 }
 

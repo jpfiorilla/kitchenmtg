@@ -3,7 +3,7 @@ import './App.css';
 import HomePageContainer from './components/HomePage/HomePageContainer';
 import ReactLogState from 'react-log-state';
 
-ReactLogState.logAll()
+ReactLogState.logAll();
 
 class App extends Component {
   render() {
