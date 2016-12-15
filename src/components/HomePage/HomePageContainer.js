@@ -5,6 +5,7 @@ import * as peopleActions from '../../actions/people-actions';
 // import PeopleList from './PeopleList';
 // import PersonInput from './PersonInput';
 import HomePage from './HomePage';
+import AddPlayer from './AddPlayer';
 
 class HomePageContainer extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class HomePageContainer extends Component {
     // console.log('numplayers', numplayers);
     return (
       <div className="wholeHomePage">
-        <div>
+        <div className="numPlayersCounter">
           <p>Numplayers: {numplayers}</p>
           <button onClick={this.onAddPlayerClick}>Add Player</button>
         </div>
@@ -38,9 +39,9 @@ class HomePageContainer extends Component {
   }
 }
 
-HomePageContainer.propTypes = {
-  actions: PropTypes.object.isRequired
-};
+// HomePageContainer.propTypes = {
+//   actions: PropTypes.object.isRequired
+// };
 
 function mapStateToProps(state, props) {
   return {

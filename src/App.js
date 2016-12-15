@@ -9,8 +9,10 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
+          <div className="insideHeader">
           {/*<img src={logo} className="App-logo" alt="logo" />*/}
-          <h2>KitchenMTG</h2>
+            <h2>KitchenMTG</h2> 
+          </div>
         </div>
         <HomePageContainer />
       </div>
